@@ -1,0 +1,25 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import linear_model
+
+df= pd.read_csv("LRinput.csv")
+df
+
+%matplotlib inline
+plt.xlabel("Driving hours")
+plt.ylabel("Risk score")
+plt.scatter(df.dhours,df.risk,color='red',marker='+')
+
+reg=linear_model.LinearRegression()
+reg.fit(df[['dhours']],df.risk)
+
+%matplotlib inline
+plt.xlabel("Driving hours")
+plt.ylabel("Risk score")
+plt.scatter(df.dhours,df.risk,color='red',marker='+')
+plt.plot(df.dhours,reg.predict(df[['dhours']]),color='blue')
+
+reg.score(df[['dhours']],df.risk)
+reg.coef_
+reg.intercept_
